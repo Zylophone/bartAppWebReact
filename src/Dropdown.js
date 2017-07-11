@@ -4,8 +4,7 @@ import Trains from './Trains.js';
 export default class Dropdown extends Component {
     // use event.target.value for value of onChange
     render(){
-            console.log('yo duides');
-        
+            console.log('dropdown render');
         return (
             <div >
                 <select onChange={(event) => this.props.onChange(event.target.value)}>

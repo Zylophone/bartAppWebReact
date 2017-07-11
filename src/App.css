@@ -1,5 +1,37 @@
+body {
+  background-color:#222;
+}
+.default-text {
+  color:#FF3333;
+  font-size: 30px;
+}
+.default-text.li {
+    text-decoration: none;
+    list-style: none;
+}
+.Header {
+  padding:15px, 0, 15px, 0;
+  border:1px solid #333;
+  height:100px;
+  width:100%;
+  color:#fff;
+}
+
+ul {
+  list-style: none;
+  text-align: left;
+  float:left;
+  margin-left:30%;
+}
+
 .App {
-  text-align: center;
+  text-align:center;
+  
+}
+
+.trainArriving {
+  animation: flashing-text infinite 1s linear;
+
 }
 
 .App-logo {
@@ -9,9 +41,22 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  border:1px, solid, green;
+  height: 50px;
   padding: 20px;
   color: white;
+  float:left;
+
+}
+.App-name-2{
+  float:left;
+  padding-left:35%;
+  padding-top:20px;
+}
+
+h1.trainArriving {
+  font-size:7em;
+  
 }
 
 .App-intro {
@@ -21,4 +66,9 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@keyframes flashing-text {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }

@@ -13,10 +13,7 @@ class App extends Component {
       title: 'this is my app',
       trainTimes: [null],
       trainSelected:false,
-      timeOut:setTimeout(()=>{
-        console.log('call back on timer');
-        this.testingThis(this.state.currentStation
-      )}, 10000),
+      timeOut:null,
       loading:false,
       currentStation: null,
       stationName: null,
@@ -28,68 +25,72 @@ class App extends Component {
 
 
 componentDidMount() {
+  console.log('component Did mount');
   const url = 'http://api.bart.gov/api/stn.aspx?cmd=stns&key=MW9S-E7SL-26DU-VV8V&json=y';
   this.setState({loading: true})
   fetch(url)
     .then(response => response.json())
     .then( (json) => json.root)
     .then(allStations => {
-      console.log(allStations.stations.station);
-        console.log(allStations.stations.station[0].abbr);
         this.setState({loading: false, currentStation:'none', allStations:allStations.stations.station});
-        console.log(this.state);
+        // console.log(this.state);
     }
   )
 }
-  testingThis(station){
-    console.log(this.state.timeOut === null);
-    // if(this.state.timeOut === null){
-    //   
-    // } else {
-      // clearTimeout(this.state.timeOut);
-    // }
-    
-    console.log(station);
-    // console.log(this.state.currentStation);
-    
-    this.setState({currentStation:station});
-    
-    console.log(station);
-    console.log(this.state.currentStation);
-    // make API request for station
-    let url = 'https://api.bart.gov/api/etd.aspx?cmd=etd&orig=' + station + '&key=MW9S-E7SL-26DU-VV8V&json=y';
-    fetch(url)
-    .then(response => response.json())
-    .then( (json) => json.root)
-    .then(allTrains => {
-        this.setState({trainTimes:allTrains.station[0].etd.map((e,i)=> [e.destination + ' - ', e.estimate[0] ? e.estimate[0].minutes + ' min' : 'nothing', e.estimate[1] ? e.estimate[1].minutes + ' min' : 'nothing', e.estimate[2] ? e.estimate[2].minutes + ' min' : 'nothing']), stationName:allTrains.station[0].name});
-    });
-    console.log(this.state);
-    debugger;
-      this.state.timeOut;
-      // if(this.state.currentStation === station || this.state.currentStation === 'none' || isNew){
-      //         setTimeout(()=>this.testingThis(station, false), 10000);
-      //         console.log('just called' + station);
-      // }
 
-    
+componentWillMount(){
+  console.log('component will mount');
+}
+componentWillUpdate(){
+  console.log('component will update');
+  
+  
+}
+componentDidUpdate(){
+  console.log('component did update');
+}
+testingThis(station){
+  console.log(station);
+  console.log('starting call back');
+  this.setState({currentStation:station});
+  // make API request for station
+  let url = 'https://api.bart.gov/api/etd.aspx?cmd=etd&orig=' + station + '&key=MW9S-E7SL-26DU-VV8V&json=y';
+  fetch(url)
+  .then(response => response.json())
+  .then( (json) => json.root)
+  .then(allTrains => {
+      this.setState({trainTimes:allTrains.station[0].etd.map((e,i)=> [e.destination, e.estimate[0] ? e.estimate[0].minutes + ' min' : 'nothing', e.estimate[1] ? e.estimate[1].minutes + ' min' : 'nothing', e.estimate[2] ? e.estimate[2].minutes + ' min' : 'nothing']), stationName:allTrains.station[0].name});
+  });
+  console.log('calling call back');
+    setTimeout(()=>{
+        console.log('call back on timer');
+        this.testingThis(this.state.currentStation
+      )}, 10000)
 }
 
-  updateState(){
+
+  updateState(station){
   }
   
 
   render() {
+    console.log('render');
     let stationName = 'yo';
     return (
-      <div className="App">
-        <Header />
-        <Dropdown stations = {this.state.allStations} id={(station)=>this.testingThis()} onChange={(station)=> this.testingThis(station)}/>
+      <div className="App" style={styles}>
+        <Header station={this.state.stationName}/>
+        <Dropdown stations = {this.state.allStations} onChange={(station)=> this.testingThis(station)}/>
         <h3>{this.state.loading ? 'loading' : 'loaded'}</h3>
-        <Body stationName = {this.state.stationName} trains = {this.state.trainTimes}/>
+        <Body style={styles} stationName = {this.state.stationName} trains = {this.state.trainTimes}/>
       </div>
     );
   }
+}
+
+const styles = {
+
+
+
 }
 
 export default App;
