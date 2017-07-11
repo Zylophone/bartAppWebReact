@@ -28,12 +28,25 @@ ul {
   text-align:center;
   
 }
-.App-body{
-  animation:text-scroll infinite 4s linear;
+/*.App-body {
+  
+}*/
+.train-times {
+  z-index: -1;
+  animation:text-scroll infinite 15s linear;
+}
+
+.train-times2 {
+  width: 100%;
+  animation: text-scroll-horizontal infinite 15s linear;
+  white-space: nowrap;
 }
 
 .trainArriving {
   animation: flashing-text infinite 1s linear;
+  z-index: 2;
+  
+  
 
 }
 
@@ -77,6 +90,11 @@ h1.trainArriving {
 .dropdown {
   padding:20px;
   border-bottom:2px solid #333;
+  z-index: 2;
+  position:absolute;
+  background-color: #222;
+  width:100%;
+  top:0;
 }
 
 @keyframes App-logo-spin {
@@ -99,7 +117,22 @@ h1.trainArriving {
     transition-timing-function: ease-out; 
     }
   to { 
-    transform: translateY(-200px);
+    transform: translateY(-1500px);
+    transition-timing-function: ease-out; 
+   }
+}
+
+@keyframes text-scroll-horizontal {
+  0% {  
+    transform: translateX(0);
+    transition-timing-function: ease-out; 
+    }
+    30% {  
+    transform: translateX(0);
+    transition-timing-function: ease-out; 
+    }
+  to { 
+    transform: translateX(-1500px);
     transition-timing-function: ease-out; 
    }
 }
