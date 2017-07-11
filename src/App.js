@@ -78,7 +78,6 @@ testingThis(station){
     let stationName = 'yo';
     return (
       <div className="App" style={styles}>
-        <Header station={this.state.stationName}/>
         <Dropdown stations = {this.state.allStations} onChange={(station)=> this.testingThis(station)}/>
         <h3>{this.state.loading ? 'loading' : 'loaded'}</h3>
         <Body style={styles} stationName = {this.state.stationName} trains = {this.state.trainTimes}/>

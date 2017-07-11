@@ -14,7 +14,6 @@ const Body = (props) => {
       <div className="body default-text">
         <div className="App-body">
           <h1 className="trainArriving">{currentTrain === null ? '' : currentTrain.toUpperCase()}</h1>
-          {/*<h2>{props.stationName}</h2>*/}
          <ul>{currentTrain !== null ? 'nothing' : props.trains.map((e,i)=><li key={i}><h3>{e[0]}</h3><p>{e[1]}, {e[2]}, {e[3]}</p></li>)}
          </ul>
         </div>
